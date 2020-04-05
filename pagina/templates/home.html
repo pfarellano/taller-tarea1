@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="">
 </head>
 <body>
-<h1>pagina de inicio hola hola</h1>
+<h1>pagina de inicio</h1>
 
 <form id="searchform" action="{% url 'busqueda' %}" accept-charset="utf-8">
       <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Buscar">
@@ -18,7 +18,9 @@
 
 <ul>
 {% for id,nombre,fecha,codigo in lista_tuplas %}
-    <p> Nombre: <a href={% url 'episodio' id=id %}> {{ nombre }}</a> fecha de publicacion: {{ fecha }}       codigo del episodio: {{ codigo }}  </p><br><br>
+    <p> Nombre: <a href={% url 'episodio' id=id %}> {{ nombre }}</a></p>
+    <p>fecha de publicacion: {{ fecha }} </p>
+    <p>codigo del episodio: {{ codigo }}  </p><br><br>
 {% endfor %}
 </ul>
 
