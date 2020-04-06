@@ -7,15 +7,14 @@ import requests
 def home(request):
 
     lista_tuplas=[]
-
-    respuesta1=requests.get('https://rickandmortyapi.com/api/episode/')
+    respuesta1=requests.get('https://integracion-rick-morty-api.herokuapp.com/api/episode/')
     respuesta1_en_json=respuesta1.json()
     lista1_episodios=respuesta1_en_json['results']
     for elemento in lista1_episodios:
         tupla=(elemento["id"],elemento["name"],elemento["air_date"],elemento["episode"])
         lista_tuplas.append(tupla)
     while respuesta1_en_json["info"]["next"]!="":
-        respuesta1 = requests.get('https://rickandmortyapi.com/api/episode/?page=2')
+        respuesta1 = requests.get('https://integracion-rick-morty-api.herokuapp.com/api/episode/?page=2')
         respuesta1_en_json = respuesta1.json()
         lista1_episodios = respuesta1_en_json['results']
         for elemento in lista1_episodios:
@@ -26,7 +25,7 @@ def home(request):
     return render(request, 'home.html', {"lista_tuplas":lista_tuplas})
 
 def episodio(request, id):
-    url_total="https://rickandmortyapi.com/api/episode/"+id
+    url_total="https://integracion-rick-morty-api.herokuapp.com/api/episode/"+id
     respuesta = requests.get(url_total)
     respuesta_json=respuesta.json()
     nombre= respuesta_json["name"]
@@ -46,7 +45,7 @@ def episodio(request, id):
 
 
 def personaje(request, ur):
-    url_total="https://rickandmortyapi.com/api/character/"+ur
+    url_total="https://integracion-rick-morty-api.herokuapp.com/api/character/"+ur
     respuesta = requests.get(url_total)
     respuesta_json = respuesta.json()
     nombre = respuesta_json["name"]
@@ -81,7 +80,7 @@ def personaje(request, ur):
 
 
 def lugar(request, id):
-    url_total="https://rickandmortyapi.com/api/location/"+id
+    url_total="https://integracion-rick-morty-api.herokuapp.com/api/location/"+id
     respuesta = requests.get(url_total)
     respuesta_json = respuesta.json()
     nombre = respuesta_json["name"]
@@ -107,7 +106,7 @@ def busqueda(request):
     query = request.GET.get('q')
 
     diccionario_nombres_episodios={}
-    todos_los_episodios = requests.get('https://rickandmortyapi.com/api/episode/')
+    todos_los_episodios = requests.get('https://integracion-rick-morty-api.herokuapp.com/api/episode/')
     respuesta_episodios= todos_los_episodios.json()
     lista_episodios=respuesta_episodios["results"]
     for episodio in lista_episodios:
@@ -139,7 +138,7 @@ def busqueda(request):
 
 
     diccionario_nombres_personajes = {}
-    todos_los_personajes = requests.get('https://rickandmortyapi.com/api/character/')
+    todos_los_personajes = requests.get('https://integracion-rick-morty-api.herokuapp.com/api/character/')
     respuesta_personajes= todos_los_personajes.json()
     lista_personajes = respuesta_personajes["results"]
     for personaje in lista_personajes:
@@ -172,7 +171,7 @@ def busqueda(request):
 
 
     diccionario_nombres_lugares = {}
-    todos_los_lugares = requests.get('https://rickandmortyapi.com/api/location/')
+    todos_los_lugares = requests.get('https://integracion-rick-morty-api.herokuapp.com/api/location/')
     respuesta_lugares = todos_los_lugares.json()
     lista_lugares = respuesta_lugares["results"]
     for lugar in lista_lugares:
